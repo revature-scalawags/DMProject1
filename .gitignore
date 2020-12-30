@@ -1,0 +1,68 @@
+# Created by https://www.toptal.com/developers/gitignore/api/vscode,sbt,bloop,metals,apachehadoop,yarn
+# Edit at https://www.toptal.com/developers/gitignore?templates=vscode,sbt,bloop,metals,apachehadoop,yarn
+
+### ApacheHadoop ###
+*.iml
+*.ipr
+*.iws
+*.orig
+*.rej
+.idea
+.svn
+.classpath
+.project
+.settings
+target
+hadoop-common-project/hadoop-kms/downloads/
+hadoop-hdfs-project/hadoop-hdfs/downloads
+hadoop-hdfs-project/hadoop-hdfs-httpfs/downloads
+hadoop-common-project/hadoop-common/src/test/resources/contract-test-options.xml
+hadoop-tools/hadoop-openstack/src/test/resources/contract-test-options.xml
+
+### Bloop ###
+.bloop/
+
+### Metals ###
+.metals/
+project/**/metals.sbt
+
+### SBT ###
+# Simple Build Tool
+# http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
+
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.history
+.cache
+.lib/
+.bsp
+
+### vscode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### yarn ###
+# https://yarnpkg.com/advanced/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# if you are NOT using Zero-installs, then:
+# comment the following lines
+!.yarn/cache
+
+# and uncomment the following lines
+# .pnp.*
+
+# End of https://www.toptal.com/developers/gitignore/api/vscode,sbt,bloop,metals,apachehadoop,yarn
