@@ -54,12 +54,13 @@ ERROR 1045 (28000): Access denied for user 'davidmasterson'@'localhost' (using p
 > mysql> GRANT ALL PRIVILEGES ON * . * TO 'hiveuser'@'localhost';  
 > mysql> FLUSH PRIVILEGES;  
 
-### references: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+## references: 
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
 
-### Using MySQL:
+##### Using MySQL:
 https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
 
-## Using Hive  
+#### Using Hive  
 http://davidiscoding.com/quey-data-stored-in-hdfs-with-hive
 
 
