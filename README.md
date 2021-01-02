@@ -1,14 +1,17 @@
 # Project1
 - [x] Install hadoop 3.3.0
 - [x] Install Yarn 3.1.2
-- [ ] Install Hive
+- [x] Install Hive
 - [x] Get DataSet and move to hdfs
 - [ ] Modify instructors word count to work with my csv file
 - [x] Install MySql
+- [ ] Figure out quering through Hive
 
-> dataset question: What was the most sold game?
+> dataset question: What was the most sold game? 
+> 
 > dataset question 2 : What system has the most sold games? 
-> dataset question 3 : What year did the most games get sold?
+>  
+> dataset question 3 : What year did the most games get sold?  
 
 ## Tech Stack
 > XCode Developer Tools
