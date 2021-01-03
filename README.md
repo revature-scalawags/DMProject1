@@ -19,18 +19,19 @@
 > Hive 3.1.2   
 > Scala 2.13.4  
 > MySql 8.0.22   
-> JDK 11.0.9
+> JDK 8
 > JDBC Connector 8.0.22
+> sbt 1.4.6
 
 ## Install Stack order
 // If you get an invalid compiler error when doing brew install scala, do step one  otherwise skip step one.
 1. Install XCode Developer Tools  
-//  https://ma.ttias.be/mac-os-xcrun-error-invalid-active-developer-path-missing-xcrun/
-2. > $ brew install scala  
-3. Install JDK 11.0.9  
-//  https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
+//  https://ma.ttias.be/mac-os-xcrun-error-invalid-active-developer-path-missing-xcrun/ 
+3. Install JDK 8 
+//  https://java.tutorials24x7.com/blog/how-to-install-java-8-on-mac  
 4. install homebrew // only on mac   
-//  https://docs.brew.sh/Installation. 
+//  https://docs.brew.sh/Installation.  
+4. $ brew install sbt 
 5. > $  brew install hadoop   
 // as of this date installs version 3.3.0.   
 //  https://kontext.tech/column/hadoop/547/install-hadoop-330-on-mac. 
@@ -61,21 +62,55 @@ https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-gr
 https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
 
 #### Using Hive  
-http://davidiscoding.com/quey-data-stored-in-hdfs-with-hive
+https://www.tutorialspoint.com/hive/index.htm  
+http://davidiscoding.com/quey-data-stored-in-hdfs-with-hive  
+ 
 
 
-# Run Program
+# Run Program  
+// first thing you need to disable csrutil. IOT do this restart your mac and hold cmd and r until you see the apple and a loading bar. When recovering screen comes up click on utilites and select terminal. Type $ csrutil diaable and then restart your computer.
 ## 1. Run Hadoop and Yarn
 > $ hstart
 ## 2. Create folders in hdfs  
 > $ hdfs dfs -mkdir /user  
 > $ hdfs dfs -mkdir /input  
-> $ hdfs dfs -mkdir /output   
+> $ hdfs dfs -mkdir /output 
+> $ hdfs dfs -mkdir /tmp    
+## 3. Change permisions
+> hdfs dfs -chmod g+w /tmp  
+> hdfs dfs -chmod g+w /user/hive/warehouse
 ## 3. Move dataset to hdfs input folder  
-> $ hdfs dfs -put [full path to local dataset] [/input]  
+> $ hdfs dfs -put [full path to local dataset] /input   
+## 4. Start Hive  
+> $ cd $HIVE_HOME  
+> $ bin/hive  // I got a java.lang.ClassCastException when running hive. I chased this for many days uninstalling and reinstalling hadoop and Jave. I tried java 8 and still same thing. I assure you it's not anything you are doing so don't restart, There is an incompampatability between hive and Java. If interested as to why, read the following    
+https://mostlymaths.net/2019/02/apache-hive-and-javalangclasscastexcept.html/  
+> $ brew install azure-functions-core-tools@3  
 
 ## 2. Run MySql
 > $ brew services start mysql  
-> $ mysql -u hiveuser -p  
-> enter hiveuser's password  
+> mysql > mysql -u hiveuser -p  
+> enter hiveuser's password 
+
+## Open a new terminal window and run hive.   
+> $ $HIVE_HOME/bin/hive
+
+##  (optional) 5. Turn off namenode safemode  
+> $ hdfs dfsadmin -safemode leave  
+// if you get an error saying that namenode is in safemode.
+
+## Create DataBase  
+> hive> CREATE DATABASE <db name >  
+## Create table with columns to match your dataset 
+> hive> CREATE TABLE IF NOT EXISTS <table name>(column1_name datatype, column2 ect...);
+## Load dataset data into table. 
+(From hdfs to Hive) 
+> hive> LOAD DATA INPATH '<file path>' INTO TABLE <database>.<table>;  
+(From local system to Hive)  
+> hive> LOAD DATA LOCAL INPATH '<file' path>' INTO TABLE <database>.<table>;
+
+## Execute Query  
+> hive> INSERT OVERWRITE DIRECTORY '/user/output' row format delimited fields terminated by '\t' stored as textfile <QUERY>;
+
+
 
