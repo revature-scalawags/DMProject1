@@ -5,8 +5,8 @@ import scala.io.StdIn._
 object Runner extends App{
     println("What would you like to do?\n" +
     "1. Create new dataset from existing dataset.\n" +
-    "2. Run Hadoop\n" +
-    "3. Run Hive\n." +
+    "2. Run Hadoop.\n" +
+    "3. Run Hive.\n" +
     "4. Quit."
     )
     val choice = readLine()

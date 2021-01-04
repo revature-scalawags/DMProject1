@@ -5,7 +5,7 @@
 - [x] Get DataSet and move to hdfs
 - [ ] Modify instructors word count to work with my csv file
 - [x] Install MySql
-- [ ] Figure out quering through Hive
+- [x] Figure out quering through Hive
 
 > dataset question: What was the most sold game? 
 > 
