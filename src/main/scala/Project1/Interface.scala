@@ -2,6 +2,7 @@ import CSVCreator._
 import scala.io.StdIn._
 import sys.process._
 import scala.language.postfixOps
+import scala.collection.mutable.ListBuffer
 
 object InterfaceMethods {
     
@@ -50,13 +51,14 @@ object InterfaceMethods {
             case "6" => moveHDFSFolder()
             case "7" => renameHDFSFolder()
             case "8" => moveFileFromLocalSystemToHDFS()
-            case "9" => runhiveTasks()
+            case "9" => runHiveTasks()
             case "10" => stopHadoop()
             case "11" => stopYarn()
-            case _ => System.exit(0)
+            case "12" => System.exit(0)
+            case _ => {
                 println("Invalid selection") 
                 runHadoopTasks()
-            
+            }
         }
 
 
@@ -191,36 +193,31 @@ object InterfaceMethods {
 
     // Hive functions-------------------------------------------------
 
-    def runhiveTasks(){
+    def runHiveTasks(){
         println("What would you like to do?\n" +
-        "1. Create Database.\n" +
-        "2. Remove a Database.\n" +
-        "3. Create a Table.\n" +
-        "4. Drop a Table.\n" +
-        "5. Create a User\n" +
-        "6. Go back to Hadoop Tasks.\n" +
-        "7. Quit")
+        "1. Start Hive.\n" +
+        "2. Go back to Hadoop Tasks.\n" +
+        "3. Quit")
+        val choice = readLine()
+        choice match {
+            case "1" => runHive()
+            case "2" => runHadoopTasks()
+            case "3" => System.exit(0)
+            case _ => {
+                println("Invalid selection")
+                runHiveTasks()
+            }
+        }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     def runHive(){
-        "$HIVE_HOME/bin/hive".!
+        try {
+            println("Please wait starting Hive.")
+            "/usr/local/Cellar/hive/3.1.2_2/libexec/bin/hive".!
+        } catch {
+            case e: Exception => println("Was unable to start hive.")
+        }
+        runHiveTasks()
     }
-
-    def createHiveDB(dbName: String){
-        s"CREATE DATABASE IF NOT EXISTS $dbName;"
-    }
-
-    def createHiveTable(columnNames: List[String]){
-
-    }
-
 }

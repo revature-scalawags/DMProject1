@@ -13,7 +13,7 @@ object Runner extends App{
     choice match {
         case "1" => createSmallerDataSet()
         case "2" => runHadoopTasks()
-        case "3" => runhiveTasks()
+        case "3" => runHiveTasks()
         case _ => 
     }
 }
