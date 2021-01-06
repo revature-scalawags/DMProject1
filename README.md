@@ -7,11 +7,11 @@
 - [x] Install MySql
 - [x] Figure out quering through Hive
 
-> dataset question: What was the most sold game? 
+> dataset question: What was the most sold game?  WII Sport with 82
 > 
-> dataset question 2 : What system has the most sold games? 
+> dataset question 2 : What system has the most sold games? PS2 with 644
 >  
-> dataset question 3 : What year did the most games get sold?  
+> dataset question 3 : What publisher did the most games get sold?  2008 with 334
 
 ## Tech Stack
 > XCode Developer Tools
@@ -110,7 +110,17 @@ https://mostlymaths.net/2019/02/apache-hive-and-javalangclasscastexcept.html/
 > hive> LOAD DATA LOCAL INPATH '<file' path>' INTO TABLE <database>.<table>;
 
 ## Execute Query  
-> hive> INSERT OVERWRITE DIRECTORY '/user/output' row format delimited fields terminated by '\t' stored as textfile <QUERY>;
+> hive> INSERT OVERWRITE DIRECTORY '/user/output' row format delimited fields terminated by '\t' <QUERY>;
+
+EXAMPLE QUERY:
+INSERT OVERWRITE DIRECTORY '/user/output2/yearWithMostSales'
+    row format delimited
+    fields terminated by '\t'
+    SELECT year,
+    SUM(global_sales) AS total_sales
+    FROM userdb.videogame
+    GROUP BY year
+    SORT BY total_sales DESC;
 
 
 
